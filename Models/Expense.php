@@ -3,11 +3,12 @@ require_once 'Model.php';
 
 class Expense extends Model {
     public function getAllExpenses(): array {
-        $sql = "SELECT * FROM expenses";
+        $sql = "SELECT * FROM expenses ORDER BY date DESC"; // Tri par date décroissante
         $result = $this->executeRequest($sql);
         $expenses = $result->fetchAll(PDO::FETCH_ASSOC);
         foreach ($expenses as &$expense) {
-            $expense['date'] = date("j F Y", strtotime($expense['date']));
+            // Utilisez le format 'd/m/Y' pour afficher la date comme 'jour/mois/année'
+            $expense['date'] = date("d/m/Y", strtotime($expense['date']));
         }
     
         return $expenses;
