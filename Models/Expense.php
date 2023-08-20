@@ -2,17 +2,17 @@
 require_once 'Model.php';
 
 class Expense extends Model {
-    public function getAllExpenses(): array {
-        $sql = "SELECT * FROM expenses ORDER BY date DESC"; // Tri par date décroissante
-        $result = $this->executeRequest($sql);
+    public function getAllExpensesByMonth(string $month): array {
+        $sql = "SELECT * FROM expenses WHERE MONTH(date) = ?";
+        $result = $this->executeRequest($sql, array($month));
         $expenses = $result->fetchAll(PDO::FETCH_ASSOC);
         foreach ($expenses as &$expense) {
-            // Utilisez le format 'd/m/Y' pour afficher la date comme 'jour/mois/année'
             $expense['date'] = date("d/m/Y", strtotime($expense['date']));
         }
     
         return $expenses;
     }
+    
 
     public function addExpense(string $description, float $amount, string $date): bool {
         $formattedDate = date("Y-m-d", strtotime($date));

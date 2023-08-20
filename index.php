@@ -5,8 +5,11 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 // Handle preflight requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    // Return status 200 for preflight requests
-    http_response_code(200);
+    // Handle preflight requests
+    header('Access-Control-Allow-Origin: http://localhost:3000'); 
+    header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+    http_response_code(204);
     exit;
 }
 
@@ -18,6 +21,7 @@ $router = new Router();
 $router->addRoute('GET', '/expense_tracker/', 'ExpenseController', 'getAllExpenses');
 $router->addRoute('POST', '/expense_tracker/', 'ExpenseController', 'addExpense');
 $router->addRoute('DELETE', '/expense_tracker/', 'ExpenseController', 'deleteExpense');
+$router->addRoute('GET', '/expense_tracker/month', 'ExpenseController', 'getExpensesByMonth');
 
 
 // Execute the route

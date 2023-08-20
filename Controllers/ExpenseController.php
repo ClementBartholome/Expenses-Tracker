@@ -9,9 +9,17 @@ class ExpenseController {
     }
 
     public function getAllExpenses() {
-        $expenses = $this->expenseModel->getAllExpenses();
+        $currentMonth = date("m", strtotime($this->getCurrentMonth()));
+        $expenses = $this->expenseModel->getAllExpensesByMonth($currentMonth);
         echo json_encode($expenses);
     }
+
+    
+
+    private function getCurrentMonth() {
+        return date("Y-m-d", strtotime($_GET['month'] ?? 'now'));
+    }
+    
 
     public function addExpense() {
         $description = $_POST["description"];
