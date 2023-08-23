@@ -29,7 +29,7 @@ class Router {
                 $year = intval($_GET['year']);
                 $this->ctrlexpense->getExpensesForMonth($month, $year);
             } else {
-                throw new Exception("Action non valide"); // Au lieu d'appeler getAllExpenses()
+                throw new Exception("Action non valide");
             }
         }
         catch (Exception $e) {
