@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { addExpense, getExpenses } from "./api";
-import ExpensesContext from "../contexts/ExpensesContext";
+import ExpensesContext from "../contexts/ExpenseContext";
 
 export default function ExpenseForm() {
   const [description, setDescription] = useState("");

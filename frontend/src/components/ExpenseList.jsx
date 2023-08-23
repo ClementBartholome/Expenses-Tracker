@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useCallback, useState } from "react";
 import { deleteExpense, getExpenses } from "./api";
-import ExpensesContext from "../contexts/ExpensesContext";
+import ExpenseContext from "../contexts/ExpenseContext";
 import { formatAmount, formatDate } from "../utils/Utils";
 
 export default function ExpenseList() {
   const { expenses, setExpenses, currentMonth, setCurrentMonth } =
-    useContext(ExpensesContext);
+    useContext(ExpenseContext);
 
   const [totalExpenses, setTotalExpenses] = useState(0);
 

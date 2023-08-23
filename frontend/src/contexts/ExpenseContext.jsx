@@ -1,9 +1,9 @@
 import React, { createContext, useState, useEffect } from "react";
 import { getExpenses } from "../components/api";
 
-const ExpensesContext = createContext();
+const ExpenseContext = createContext();
 
-export const ExpensesProvider = ({ children }) => {
+export const ExpenseProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
@@ -21,11 +21,11 @@ export const ExpensesProvider = ({ children }) => {
   };
 
   return (
-    <ExpensesContext.Provider
+    <ExpenseContext.Provider
       value={{ expenses, setExpenses, currentMonth, setCurrentMonth }}>
       {children}
-    </ExpensesContext.Provider>
+    </ExpenseContext.Provider>
   );
 };
 
-export default ExpensesContext;
+export default ExpenseContext;

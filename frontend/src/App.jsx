@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import RoutesConfig from "./RoutesConfig";
-import { ExpensesProvider } from "./contexts/ExpensesContext";
+import { ExpenseProvider } from "./contexts/ExpenseContext";
 
 export default function App() {
   return (
     <Router>
-      <ExpensesProvider>
+      <ExpenseProvider>
         <RoutesConfig />
-      </ExpensesProvider>
+      </ExpenseProvider>
     </Router>
   );
 }
