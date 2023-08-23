@@ -16,18 +16,20 @@ class Router {
                 
                 switch ($action) {
                     case 'add-expense':
-                       $this->ctrlexpense->addExpense();
+                        $this->ctrlexpense->addExpense();
                         break;
-
-                    case 'delete-expense':
-                        $this->ctrlexpense->deleteExpense();
-                        break;
-
+                    case 'delete-expense': // Ajout de cette clause
+                            $this->ctrlexpense->deleteExpense();
+                            break;
                     default:
                         throw new Exception("Action non valide");
                 }
-            } else {  // no action : display all expenses
-                $this->ctrlexpense->getAllExpenses();
+            } else if (isset($_GET['month']) && isset($_GET['year'])) {
+                $month = intval($_GET['month']);
+                $year = intval($_GET['year']);
+                $this->ctrlexpense->getExpensesForMonth($month, $year);
+            } else {
+                throw new Exception("Action non valide"); // Au lieu d'appeler getAllExpenses()
             }
         }
         catch (Exception $e) {

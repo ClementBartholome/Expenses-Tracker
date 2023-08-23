@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getAllExpenses } from "../components/api";
+import { getExpenses } from "../components/api";
 
 const ExpensesContext = createContext();
 
@@ -13,7 +13,7 @@ export const ExpensesProvider = ({ children }) => {
 
   const fetchAllExpenses = async () => {
     try {
-      const expensesData = await getAllExpenses();
+      const expensesData = await getExpenses();
       setExpenses(expensesData);
     } catch (error) {
       console.error("Error fetching expenses:", error);

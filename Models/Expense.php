@@ -3,15 +3,11 @@ require_once 'Model.php';
 
 class Expense extends Model {
 
-    public function getAllExpenses(): array {
-        $sql = "SELECT * FROM expenses ORDER BY date DESC"; 
-        $result = $this->executeRequest($sql);
-        $expenses = $result->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($expenses as &$expense) {
-
-            $expense['date'] = date("d/m/Y", strtotime($expense['date']));
-        }
-    
+    public function getExpensesForMonth($month, $year) {
+        $sql = "SELECT * FROM expenses WHERE MONTH(date) = ? AND YEAR(date) = ?";
+        $params = array($month, $year);
+        $stmt = $this->executeRequest($sql, $params);
+        $expenses = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $expenses;
     }
   

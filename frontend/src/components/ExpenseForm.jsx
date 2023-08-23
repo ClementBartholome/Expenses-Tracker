@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { addExpense, getAllExpenses } from "./api";
+import { addExpense, getExpenses } from "./api";
 import ExpensesContext from "../contexts/ExpensesContext";
 
 export default function ExpenseForm() {
@@ -15,7 +15,7 @@ export default function ExpenseForm() {
       setDescription("");
       setAmount("");
       setDate("");
-      const updatedExpenses = await getAllExpenses();
+      const updatedExpenses = await getExpenses();
       setExpenses(updatedExpenses);
       console.log("Expense added successfully");
     } catch (error) {
@@ -25,17 +25,17 @@ export default function ExpenseForm() {
 
   return (
     <>
-      <h2>Add Expense</h2>
+      <h2>Ajouter une dépense</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Nom"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <input
           type="number"
-          placeholder="Amount"
+          placeholder="Montant"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
@@ -45,7 +45,7 @@ export default function ExpenseForm() {
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
-        <button type="submit">Add Expense</button>
+        <button type="submit">Ajouter la dépense</button>
       </form>
     </>
   );

@@ -1,8 +1,17 @@
 const baseUrl = "http://localhost/expense_tracker/";
 
-export async function getAllExpenses() {
+export async function getExpenses(month = null, year = null) {
   try {
-    const response = await fetch(`${baseUrl}`);
+    const now = new Date();
+    const currentMonth = now.getMonth() + 1; // Les mois sont indexés à partir de 0
+    const currentYear = now.getFullYear();
+
+    const fetchUrl =
+      month && year
+        ? `${baseUrl}?month=${month}&year=${year}`
+        : `${baseUrl}?month=${currentMonth}&year=${currentYear}`;
+
+    const response = await fetch(fetchUrl);
     const data = await response.json();
     return data;
   } catch (error) {

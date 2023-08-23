@@ -7,9 +7,8 @@ class ExpenseController {
     public function __construct() {
         $this->expenseModel = new Expense();
     }
-
-    public function getAllExpenses() {
-        $expenses = $this->expenseModel->getAllExpenses();
+    public function getExpensesForMonth($month, $year) {
+        $expenses = $this->expenseModel->getExpensesForMonth($month, $year);
         echo json_encode($expenses);
     }
 
