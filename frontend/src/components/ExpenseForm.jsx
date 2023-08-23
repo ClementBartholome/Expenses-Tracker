@@ -5,15 +5,17 @@ export default function ExpenseForm() {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
+  const [category, setCategory] = useState("");
   const { handleAddExpense } = useContext(ExpenseContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await handleAddExpense(description, amount, date);
+      await handleAddExpense(description, amount, date, category);
       setDescription("");
       setAmount("");
       setDate("");
+      setCategory("");
     } catch (error) {
       console.error("An error occurred", error);
     }
@@ -40,6 +42,12 @@ export default function ExpenseForm() {
           placeholder="Date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Catégorie"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
         />
         <button type="submit">Ajouter la dépense</button>
       </form>

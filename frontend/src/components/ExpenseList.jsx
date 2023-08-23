@@ -38,6 +38,7 @@ export default function ExpenseList() {
             {expense.description}
             <span>{formatAmount(expense.amount)}</span>
             <span>{formatDate(expense.date)}</span>
+            <span className="category">{expense.category}</span>
             <button
               className="delete-button"
               onClick={() => handleDelete(expense.id)}></button>

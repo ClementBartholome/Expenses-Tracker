@@ -20,7 +20,7 @@ export async function getExpenses(month = null, year = null) {
   }
 }
 
-export async function addExpense(description, amount, date) {
+export async function addExpense(description, amount, date, category) {
   try {
     const response = await fetch(`${baseUrl}?action=add-expense`, {
       method: "POST",
@@ -29,7 +29,7 @@ export async function addExpense(description, amount, date) {
       },
       body: `description=${encodeURIComponent(
         description
-      )}&amount=${amount}&date=${date}`,
+      )}&amount=${amount}&date=${date}&category=${category}`,
     });
 
     if (response.ok) {

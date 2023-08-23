@@ -12,7 +12,7 @@ class ExpenseManager extends Model {
      * @return array An array of expenses.
      */
     public function getExpensesForMonth(int $month, int $year): array {
-        $sql = "SELECT id, description, amount, date FROM expenses WHERE MONTH(date) = ? AND YEAR(date) = ?";
+        $sql = "SELECT id, description, amount, date, category FROM expenses WHERE MONTH(date) = ? AND YEAR(date) = ?";
         $params = array($month, $year);
         $stmt = $this->executeRequest($sql, $params);
         $expensesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -36,10 +36,10 @@ class ExpenseManager extends Model {
      * @param string $date The date of the expense in "Y-m-d" format.
      * @return bool True if the expense was added successfully, false otherwise.
      */
-    public function addExpense(string $description, float $amount, string $date): bool {
+    public function addExpense(string $description, float $amount, string $date, string $category): bool {
         $formattedDate = date("Y-m-d", strtotime($date));
-        $sql = "INSERT INTO expenses (description, amount, date) VALUES (?, ?, ?)";
-        $params = array($description, $amount, $formattedDate);
+        $sql = "INSERT INTO expenses (description, amount, date, category) VALUES (?, ?, ?, ?)";
+        $params = array($description, $amount, $formattedDate, $category);
         
         try {
             $this->executeRequest($sql, $params);

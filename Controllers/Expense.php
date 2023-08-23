@@ -6,8 +6,9 @@ require_once "AbstractEntity.php";
 class Expense extends AbstractEntity implements JsonSerializable {
     private $id;
     private $description;
-    private $amount;  // Change the property type to float
-    private $date;    // Change the property type to string
+    private $amount; 
+    private $date;   
+    private $category;
 
     public function jsonSerialize() {
         return [
@@ -15,7 +16,16 @@ class Expense extends AbstractEntity implements JsonSerializable {
             'description' => $this->getDescription(),
             'amount' => $this->getAmount(),
             'date' => $this->getDate(),
+            'category' => $this->getCategory(),
         ];
+    }
+
+    public function setCategory(string $category) : void {
+        $this->category = $category;
+    }
+
+    public function getCategory() : string {
+        return $this->category;
     }
 
     public function setDescription(string $description): void {

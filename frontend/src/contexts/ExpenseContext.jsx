@@ -45,9 +45,9 @@ export const ExpenseProvider = ({ children }) => {
     }
   };
 
-  const handleAddExpense = async (description, amount, date) => {
+  const handleAddExpense = async (description, amount, date, category) => {
     try {
-      await addExpense(description, amount, date);
+      await addExpense(description, amount, date, category);
       const updatedExpenses = await getExpenses(
         currentMonth.getMonth() + 1,
         currentMonth.getFullYear()

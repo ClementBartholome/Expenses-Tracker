@@ -16,8 +16,9 @@ class ExpenseController {
         $description = $_POST["description"];
         $amount = $_POST["amount"];
         $date = $_POST["date"];
+        $category = $_POST["category"];
 
-        $result = $this->expenseManager->addExpense($description, $amount, $date);
+        $result = $this->expenseManager->addExpense($description, $amount, $date, $category);
         if ($result) {
             echo "Expense added successfully";
         } else {
