@@ -14,13 +14,7 @@ class Expense extends Model {
     
         return $expenses;
     }
-
-    public function getExpensesForMonth($month) {
-        $query = "SELECT * FROM expenses WHERE DATE_FORMAT(date, '%Y-%m') = ?";
-        $stmt = $this->executeRequest($query, [$month]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    
+  
 
     public function addExpense(string $description, float $amount, string $date): bool {
         $formattedDate = date("Y-m-d", strtotime($date));
