@@ -1,26 +1,19 @@
 import React, { useState, useContext } from "react";
-import { addExpense, getExpenses } from "./api";
-import ExpensesContext from "../contexts/ExpenseContext";
+import ExpenseContext from "../contexts/ExpenseContext";
 
 export default function ExpenseForm() {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
-  const { setExpenses, currentMonth } = useContext(ExpensesContext);
+  const { handleAddExpense } = useContext(ExpenseContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addExpense(description, amount, date);
+      await handleAddExpense(description, amount, date);
       setDescription("");
       setAmount("");
       setDate("");
-      const updatedExpenses = await getExpenses(
-        currentMonth.getMonth() + 1,
-        currentMonth.getFullYear()
-      );
-      setExpenses(updatedExpenses);
-      console.log("Expense added successfully");
     } catch (error) {
       console.error("An error occurred", error);
     }

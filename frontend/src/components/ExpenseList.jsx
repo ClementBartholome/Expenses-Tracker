@@ -1,50 +1,16 @@
-import React, { useContext, useEffect, useCallback, useState } from "react";
-import { deleteExpense, getExpenses } from "./api";
+import React, { useContext } from "react";
 import ExpenseContext from "../contexts/ExpenseContext";
 import { formatAmount, formatDate, formatMonth } from "../utils/Utils";
 
 export default function ExpenseList() {
-  const { expenses, setExpenses, currentMonth, setCurrentMonth } =
-    useContext(ExpenseContext);
-
-  const [totalExpenses, setTotalExpenses] = useState(0);
-
-  const fetchExpenses = useCallback(
-    async (month) => {
-      try {
-        const response = await getExpenses(
-          month.getMonth() + 1,
-          month.getFullYear()
-        );
-        setExpenses(response);
-
-        // Calculate total expenses
-        const total = response.reduce((acc, expense) => {
-          const numericAmount = parseFloat(expense.amount);
-          return acc + numericAmount;
-        }, 0);
-        setTotalExpenses(total); // Update total expenses
-      } catch (error) {
-        console.error("An error occurred", error);
-      }
-    },
-    [setExpenses]
-  );
-
-  useEffect(() => {
-    const initialMonth = new Date();
-    fetchExpenses(initialMonth);
-  }, [fetchExpenses]);
-
-  const handleDelete = async (expenseId) => {
-    console.log("Deleting expense with ID:", expenseId);
-    try {
-      await deleteExpense(expenseId);
-      fetchExpenses(currentMonth);
-    } catch (error) {
-      console.error("Error deleting expense:", error);
-    }
-  };
+  const {
+    expenses,
+    currentMonth,
+    setCurrentMonth,
+    totalExpenses,
+    fetchExpenses,
+    handleDelete,
+  } = useContext(ExpenseContext);
 
   const handlePrevMonth = () => {
     const prevMonth = new Date(currentMonth);
