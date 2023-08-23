@@ -17,7 +17,7 @@ require_once 'routes/router.php';
 $router = new Router();
 
 // Define routes
-$router->addRoute('GET', '/expense_tracker/', 'ExpenseController', 'getAllExpenses');
+// $router->addRoute('GET', '/expense_tracker/', 'ExpenseController', 'getAllExpenses');
 $router->addRoute('POST', '/expense_tracker/', 'ExpenseController', 'addExpense');
 $router->addRoute('DELETE', '/expense_tracker/', 'ExpenseController', 'deleteExpense');
 $router->addRoute('GET', '/expense_tracker/month', 'ExpenseController', 'getExpensesByMonth');
