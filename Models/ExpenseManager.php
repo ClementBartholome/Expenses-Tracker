@@ -12,7 +12,7 @@ class ExpenseManager extends Model {
      * @return array An array of expenses.
      */
     public function getExpensesForMonth(int $month, int $year): array {
-        $sql = "SELECT id, description, amount, date, category FROM expenses WHERE MONTH(date) = ? AND YEAR(date) = ?";
+        $sql = "SELECT id, description, amount, date, category FROM expenses WHERE MONTH(date) = ? AND YEAR(date) = ? ORDER BY date DESC" ;
         $params = array($month, $year);
         $stmt = $this->executeRequest($sql, $params);
         $expensesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
