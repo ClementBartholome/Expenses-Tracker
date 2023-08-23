@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useCallback, useState } from "react";
 import { deleteExpense, getExpenses } from "./api";
 import ExpenseContext from "../contexts/ExpenseContext";
-import { formatAmount, formatDate } from "../utils/Utils";
+import { formatAmount, formatDate, formatMonth } from "../utils/Utils";
 
 export default function ExpenseList() {
   const { expenses, setExpenses, currentMonth, setCurrentMonth } =
@@ -60,14 +60,9 @@ export default function ExpenseList() {
     fetchExpenses(nextMonth);
   };
 
-  const getFormattedMonth = (date) => {
-    const options = { year: "numeric", month: "long" };
-    return date.toLocaleDateString(undefined, options);
-  };
-
   return (
     <>
-      <h2>Dépenses du mois de : {getFormattedMonth(currentMonth)}</h2>
+      <h2>Dépenses du mois de : {formatMonth(currentMonth)}</h2>
       <h3>Total : {formatAmount(totalExpenses)}</h3>
       <button onClick={handlePrevMonth}>Mois précédent</button>
       <button onClick={handleNextMonth}>Mois suivant</button>
