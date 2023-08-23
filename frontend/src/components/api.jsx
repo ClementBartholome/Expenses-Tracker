@@ -3,7 +3,7 @@ const baseUrl = "http://localhost/expense_tracker/";
 export async function getExpenses(month = null, year = null) {
   try {
     const now = new Date();
-    const currentMonth = now.getMonth() + 1; // Les mois sont indexés à partir de 0
+    const currentMonth = now.getMonth() + 1;
     const currentYear = now.getFullYear();
 
     const fetchUrl =

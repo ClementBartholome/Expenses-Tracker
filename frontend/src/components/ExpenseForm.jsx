@@ -6,7 +6,7 @@ export default function ExpenseForm() {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
-  const { setExpenses } = useContext(ExpensesContext);
+  const { setExpenses, currentMonth } = useContext(ExpensesContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +15,10 @@ export default function ExpenseForm() {
       setDescription("");
       setAmount("");
       setDate("");
-      const updatedExpenses = await getExpenses();
+      const updatedExpenses = await getExpenses(
+        currentMonth.getMonth() + 1,
+        currentMonth.getFullYear()
+      );
       setExpenses(updatedExpenses);
       console.log("Expense added successfully");
     } catch (error) {
