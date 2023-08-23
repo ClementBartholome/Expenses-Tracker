@@ -48,11 +48,7 @@ export const ExpenseProvider = ({ children }) => {
   const handleAddExpense = async (description, amount, date, category) => {
     try {
       await addExpense(description, amount, date, category);
-      const updatedExpenses = await getExpenses(
-        currentMonth.getMonth() + 1,
-        currentMonth.getFullYear()
-      );
-      setExpenses(updatedExpenses);
+      fetchExpenses(currentMonth);
       console.log("Expense added successfully");
     } catch (error) {
       console.error("An error occurred", error);

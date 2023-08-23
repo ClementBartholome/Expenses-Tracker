@@ -38,16 +38,16 @@ export default function ExpenseForm() {
           onChange={(e) => setAmount(e.target.value)}
         />
         <input
-          type="date"
-          placeholder="Date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <input
           type="text"
           placeholder="Catégorie"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+        />
+        <input
+          type="date"
+          placeholder="Date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
         />
         <button type="submit">Ajouter la dépense</button>
       </form>
