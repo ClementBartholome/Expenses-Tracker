@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getAllExpenses, getExpensesByMonth } from "../components/api";
+import { getAllExpenses } from "../components/api";
 
 const ExpensesContext = createContext();
 
@@ -8,10 +8,10 @@ export const ExpensesProvider = ({ children }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   useEffect(() => {
-    fetchExpensesByMonth();
+    fetchAllExpenses();
   }, []);
 
-  const fetchExpensesByMonth = async (month) => {
+  const fetchAllExpenses = async () => {
     try {
       const expensesData = await getAllExpenses();
       setExpenses(expensesData);

@@ -1,49 +1,46 @@
 <?php
-require_once 'controllers/ExpenseController.php';
+require_once 'Controllers/ExpenseController.php';
 
 class Router {
-    private $routes = [];
 
-    // Add a new route definition to the router
-    public function addRoute($method, $path, $controller, $action) {
-        $this->routes[] = [
-            'method' => $method,
-            'path' => $path,
-            'controller' => $controller,
-            'action' => $action,
-        ];
+    private $ctrlexpense;
+
+    public function __construct() {
+        $this->ctrlexpense = new ExpenseController();
     }
+    
+    public function routerRequest() {
+        try {
+            if (isset($_GET['action'])) {
+                $action = $_GET['action'];
+                
+                switch ($action) {
+                    case 'add-expense':
+                       $this->ctrlexpense->addExpense();
+                        break;
 
-    // Execute the route based on the current request
-    public function execute() {
-        $requestMethod = $_SERVER['REQUEST_METHOD'];
-        $requestPath = $_SERVER['REQUEST_URI'];
+                    case 'delete-expense':
+                        $this->ctrlexpense->deleteExpense();
+                        break;
 
-        // Handle preflight requests for CORS (Cross-Origin Resource Sharing)
-        if ($requestMethod === 'OPTIONS') {
-            header('Access-Control-Allow-Origin: http://localhost:3000');
-            header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-            header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-            http_response_code(200);
-            return;
-        }
-
-        header('Access-Control-Allow-Origin: http://localhost:3000');
-        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
-        // Match the requested route with the defined routes
-        foreach ($this->routes as $route) {
-            if ($route['method'] === $requestMethod && $route['path'] === $requestPath) {
-                // Create an instance of the specified controller
-                $controller = new $route['controller'];
-                // Call the specified action within the controller
-                $action = $route['action'];
-                $controller->$action();
-                return;
+                    default:
+                        throw new Exception("Action non valide");
+                }
+            } else {  // no action : display all expenses
+                $this->ctrlexpense->getAllExpenses();
             }
         }
-        http_response_code(404);
-        echo "Page not found";
+        catch (Exception $e) {
+            // Gérer l'exception ici
+            echo "Une erreur s'est produite : " . $e->getMessage();
+        }
+    }
+
+    private function getParametre($table, $name) {
+        if (isset($table[$name])) {
+            return $table[$name];
+        }
+        else
+            throw new Exception("Paramètre '$name' absent");
     }
 }

@@ -10,12 +10,17 @@ export default function ExpenseForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addExpense(description, amount, date);
-    setDescription("");
-    setAmount("");
-    setDate("");
-    const updatedExpenses = await getAllExpenses();
-    setExpenses(updatedExpenses);
+    try {
+      await addExpense(description, amount, date);
+      setDescription("");
+      setAmount("");
+      setDate("");
+      const updatedExpenses = await getAllExpenses();
+      setExpenses(updatedExpenses);
+      console.log("Expense added successfully");
+    } catch (error) {
+      console.error("An error occurred", error);
+    }
   };
 
   return (

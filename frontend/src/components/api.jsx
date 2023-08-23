@@ -11,21 +11,9 @@ export async function getAllExpenses() {
   }
 }
 
-export async function getExpensesByMonth(month) {
-  try {
-    const formattedMonth = `${month.getFullYear()}-${month.getMonth() + 1}`;
-    const response = await fetch(`${baseUrl}month?${formattedMonth}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("An error occurred", error);
-    throw error;
-  }
-}
-
 export async function addExpense(description, amount, date) {
   try {
-    const response = await fetch(baseUrl, {
+    const response = await fetch(`${baseUrl}?action=add-expense`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -48,7 +36,7 @@ export async function addExpense(description, amount, date) {
 
 export async function deleteExpense(expenseId) {
   try {
-    const response = await fetch(baseUrl, {
+    const response = await fetch(`${baseUrl}?action=delete-expense`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
