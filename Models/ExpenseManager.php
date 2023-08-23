@@ -1,7 +1,8 @@
 <?php
 require_once 'Model.php';
+require_once "Controllers/Expense.php";
 
-class Expense extends Model {
+class ExpenseManager extends Model {
 
     /**
      * Get expenses for a specific month and year.
@@ -11,10 +12,18 @@ class Expense extends Model {
      * @return array An array of expenses.
      */
     public function getExpensesForMonth(int $month, int $year): array {
-        $sql = "SELECT * FROM expenses WHERE MONTH(date) = ? AND YEAR(date) = ?";
+        $sql = "SELECT id, description, amount, date FROM expenses WHERE MONTH(date) = ? AND YEAR(date) = ?";
         $params = array($month, $year);
         $stmt = $this->executeRequest($sql, $params);
-        $expenses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $expensesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $expenses = [];
+        foreach ($expensesData as $expenseData) {
+            $expense = new Expense();
+            $expense->hydrate($expenseData);
+            $expenses[] = $expense;
+        }
+    
         return $expenses;
     }
   

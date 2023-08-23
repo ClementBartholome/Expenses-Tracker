@@ -1,15 +1,15 @@
 <?php
-require_once 'models/Expense.php';
+require_once 'models/ExpenseManager.php';
 
 class ExpenseController {
-    private $expenseModel;
+    private ExpenseManager $expenseManager;
 
     public function __construct() {
-        $this->expenseModel = new Expense();
+        $this->expenseManager = new ExpenseManager();
     }
     public function getExpensesForMonth(int $month, int $year) {
-        $expenses = $this->expenseModel->getExpensesForMonth($month, $year);
-        echo json_encode($expenses);
+        $expenses = $this->expenseManager->getExpensesForMonth($month, $year);
+        echo json_encode($expenses); 
     }
 
     public function addExpense() {
@@ -17,7 +17,7 @@ class ExpenseController {
         $amount = $_POST["amount"];
         $date = $_POST["date"];
 
-        $result = $this->expenseModel->addExpense($description, $amount, $date);
+        $result = $this->expenseManager->addExpense($description, $amount, $date);
         if ($result) {
             echo "Expense added successfully";
         } else {
@@ -29,7 +29,7 @@ class ExpenseController {
         $data = json_decode(file_get_contents('php://input'), true);
         $expenseId = $data['id'];
     
-        $result = $this->expenseModel->deleteExpense($expenseId);
+        $result = $this->expenseManager->deleteExpense($expenseId);
         if ($result) {
             echo "Expense deleted successfully";
         } else {

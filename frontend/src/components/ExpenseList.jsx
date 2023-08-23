@@ -20,9 +20,7 @@ export default function ExpenseList() {
 
         // Calculate total expenses
         const total = response.reduce((acc, expense) => {
-          const numericAmount = parseFloat(
-            expense.amount.replace(/[^\d.-]/g, "")
-          );
+          const numericAmount = parseFloat(expense.amount);
           return acc + numericAmount;
         }, 0);
         setTotalExpenses(total); // Update total expenses
