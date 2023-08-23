@@ -2,7 +2,7 @@ const baseUrl = "http://localhost/expense_tracker/";
 
 export async function getAllExpenses() {
   try {
-    const response = await fetch(baseUrl);
+    const response = await fetch(`${baseUrl}`);
     const data = await response.json();
     return data;
   } catch (error) {

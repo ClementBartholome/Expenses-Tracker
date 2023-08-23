@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getExpensesByMonth } from "../components/api";
+import { getAllExpenses, getExpensesByMonth } from "../components/api";
 
 const ExpensesContext = createContext();
 
@@ -8,12 +8,12 @@ export const ExpensesProvider = ({ children }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   useEffect(() => {
-    fetchExpensesByMonth(currentMonth);
-  }, [currentMonth]);
+    fetchExpensesByMonth();
+  }, []);
 
   const fetchExpensesByMonth = async (month) => {
     try {
-      const expensesData = await getExpensesByMonth(month);
+      const expensesData = await getAllExpenses();
       setExpenses(expensesData);
     } catch (error) {
       console.error("Error fetching expenses:", error);
