@@ -2,7 +2,7 @@
 require_once 'Model.php';
 
 class Expense extends Model {
-    public function getAllExpensesByMonth(string $month): array {
+    public function getExpensesByMonth(string $month): array {
         $sql = "SELECT * FROM expenses WHERE MONTH(date) = ?";
         $result = $this->executeRequest($sql, array($month));
         $expenses = $result->fetchAll(PDO::FETCH_ASSOC);

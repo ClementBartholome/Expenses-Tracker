@@ -8,13 +8,11 @@ class ExpenseController {
         $this->expenseModel = new Expense();
     }
 
-    public function getAllExpenses() {
+    public function getExpensesByMonth() {
         $currentMonth = date("m", strtotime($this->getCurrentMonth()));
-        $expenses = $this->expenseModel->getAllExpensesByMonth($currentMonth);
+        $expenses = $this->expenseModel->getExpensesByMonth($currentMonth);
         echo json_encode($expenses);
     }
-
-    
 
     private function getCurrentMonth() {
         return date("Y-m-d", strtotime($_GET['month'] ?? 'now'));
