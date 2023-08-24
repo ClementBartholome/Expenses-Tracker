@@ -44,7 +44,6 @@ class Router {
             }
         }
         catch (Exception $e) {
-            // Gérer l'exception ici
             echo "Une erreur s'est produite : " . $e->getMessage();
         }
     }
