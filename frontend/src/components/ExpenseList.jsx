@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import ExpenseContext from "../contexts/ExpenseContext";
 import BudgetContext from "../contexts/BudgetContext";
-import { formatAmount, formatDate, formatMonth } from "../utils/Utils";
+import {
+  formatAmount,
+  formatDate,
+  formatMonth,
+  remainingBudget,
+} from "../utils/Utils";
 
 export default function ExpenseList() {
   const {
@@ -38,7 +43,13 @@ export default function ExpenseList() {
   return (
     <>
       <h2>Dépenses du mois de : {formatMonth(currentMonth)}</h2>
-      <h3>Total des dépenses : {formatAmount(totalExpenses)}</h3>
+      <div className="budget-recap">
+        <h3>Total des dépenses : {formatAmount(totalExpenses)}</h3>
+        <h3>
+          Budget restant :{" "}
+          {formatAmount(remainingBudget(budget, totalExpenses))}
+        </h3>
+      </div>
       {editingBudget ? (
         <>
           <div className="budget">

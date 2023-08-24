@@ -14,3 +14,7 @@ export function formatMonth(date) {
   const options = { year: "numeric", month: "long" };
   return date.toLocaleDateString(undefined, options);
 }
+
+export function remainingBudget(budget, totalExpenses) {
+  return budget - totalExpenses;
+}

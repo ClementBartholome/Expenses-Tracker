@@ -113,3 +113,8 @@ li {
   outline: none;
   width: 100px; /* Adjust the width as needed */
 }
+
+.budget-recap {
+  display: flex;
+  gap: 20px;
+}
