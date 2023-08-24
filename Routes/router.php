@@ -24,10 +24,10 @@ class Router {
                     case 'delete-expense':
                         $this->ctrlexpense->deleteExpense();
                         break;
-                    case 'add-or-update-budget': // Add new case for budget
+                    case 'add-or-update-budget':
                         $this->ctrlbudget->addOrUpdateBudget();
                         break;
-                    case 'get-budget': // Add new case for getting budget
+                    case 'get-budget':
                         $month = intval($_GET['month']);
                         $year = intval($_GET['year']);
                         $this->ctrlbudget->getBudgetForMonth($month, $year);
