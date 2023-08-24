@@ -27,8 +27,10 @@ export default function ExpenseList() {
 
   return (
     <>
-      <button onClick={handlePrevMonth}>Mois précédent</button>
-      <button onClick={handleNextMonth}>Mois suivant</button>
+      <div className="month-buttons">
+        <button onClick={handlePrevMonth}>Mois précédent</button>
+        <button onClick={handleNextMonth}>Mois suivant</button>
+      </div>
       <ul>
         {expenses.map((expense) => (
           <li key={expense.id}>
