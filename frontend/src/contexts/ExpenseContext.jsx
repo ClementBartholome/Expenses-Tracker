@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { getExpenses, deleteExpense, addExpense } from "../components/api";
+import { calculateTotalExpenses } from "../utils/Utils";
 
 const ExpenseContext = createContext();
 
@@ -16,12 +17,9 @@ export const ExpenseProvider = ({ children }) => {
       );
       setExpenses(response);
 
-      // Calculate total expenses
-      const total = response.reduce((acc, expense) => {
-        const numericAmount = parseFloat(expense.amount);
-        return acc + numericAmount;
-      }, 0);
-      setTotalExpenses(total); // Update total expenses
+      // Calculate total expenses using the Utils function
+      const total = calculateTotalExpenses(response);
+      setTotalExpenses(total);
     } catch (error) {
       console.error("An error occurred", error);
     }

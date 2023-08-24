@@ -18,3 +18,10 @@ export function formatMonth(date) {
 export function remainingBudget(budget, totalExpenses) {
   return budget - totalExpenses;
 }
+
+export function calculateTotalExpenses(expenses) {
+  return expenses.reduce((total, expense) => {
+    const numericAmount = parseFloat(expense.amount);
+    return total + numericAmount;
+  }, 0);
+}
