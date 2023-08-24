@@ -8,23 +8,22 @@ export default function ExpenseForm() {
   const [category, setCategory] = useState("");
   const { handleAddExpense } = useContext(ExpenseContext);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await handleAddExpense(description, amount, date, category);
-      setDescription("");
-      setAmount("");
-      setDate("");
-      setCategory("");
-    } catch (error) {
-      console.error("An error occurred", error);
-    }
+  const resetForm = () => {
+    setDescription("");
+    setAmount("");
+    setDate("");
+    setCategory("");
   };
 
   return (
     <>
       <h2>Ajouter une dépense</h2>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleAddExpense(description, amount, date, category);
+          resetForm();
+        }}>
         <input
           type="text"
           placeholder="Nom"
@@ -50,6 +49,9 @@ export default function ExpenseForm() {
           onChange={(e) => setDate(e.target.value)}
         />
         <button type="submit">Ajouter la dépense</button>
+        <button type="button" onClick={resetForm}>
+          Réinitialiser les champs
+        </button>
       </form>
     </>
   );

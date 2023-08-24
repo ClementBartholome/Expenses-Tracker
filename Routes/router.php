@@ -1,12 +1,15 @@
 <?php
 require_once 'Controllers/ExpenseController.php';
+require_once "Controllers/BudgetController.php";
 
 class Router {
 
     private $ctrlexpense;
+    private $ctrlbudget;
 
     public function __construct() {
         $this->ctrlexpense = new ExpenseController();
+        $this->ctrlbudget = new BudgetController();
     }
     
     public function routerRequest() {
@@ -18,9 +21,17 @@ class Router {
                     case 'add-expense':
                         $this->ctrlexpense->addExpense();
                         break;
-                    case 'delete-expense': // Ajout de cette clause
-                            $this->ctrlexpense->deleteExpense();
-                            break;
+                    case 'delete-expense':
+                        $this->ctrlexpense->deleteExpense();
+                        break;
+                    case 'add-or-update-budget': // Add new case for budget
+                        $this->ctrlbudget->addOrUpdateBudget();
+                        break;
+                    case 'get-budget': // Add new case for getting budget
+                        $month = intval($_GET['month']);
+                        $year = intval($_GET['year']);
+                        $this->ctrlbudget->getBudgetForMonth($month, $year);
+                        break;
                     default:
                         throw new Exception("Action non valide");
                 }

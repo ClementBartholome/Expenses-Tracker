@@ -63,3 +63,39 @@ export async function deleteExpense(expenseId) {
     throw error;
   }
 }
+
+export async function getBudgetForMonth(month, year) {
+  try {
+    const response = await fetch(
+      `${baseUrl}?action=get-budget&month=${month}&year=${year}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("An error occurred", error);
+    throw error;
+  }
+}
+
+export async function addOrUpdateBudget(month, year, budget) {
+  try {
+    const response = await fetch(`${baseUrl}?action=add-or-update-budget`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `month=${encodeURIComponent(month)}&year=${encodeURIComponent(
+        year
+      )}&budget=${encodeURIComponent(budget)}`,
+    });
+
+    if (response.ok) {
+      console.log("Budget added/updated successfully");
+    } else {
+      console.error("Error adding/updating budget");
+    }
+  } catch (error) {
+    console.error("An error occurred", error);
+    throw error;
+  }
+}

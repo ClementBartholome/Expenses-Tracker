@@ -2,12 +2,15 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import RoutesConfig from "./RoutesConfig";
 import { ExpenseProvider } from "./contexts/ExpenseContext";
+import { BudgetProvider } from "./contexts/BudgetContext";
 
 export default function App() {
   return (
     <Router>
       <ExpenseProvider>
-        <RoutesConfig />
+        <BudgetProvider>
+          <RoutesConfig />
+        </BudgetProvider>
       </ExpenseProvider>
     </Router>
   );

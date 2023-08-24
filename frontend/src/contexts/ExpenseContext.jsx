@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { getExpenses, deleteExpense, addExpense } from "../components/api";
 
 const ExpenseContext = createContext();
@@ -8,32 +8,29 @@ export const ExpenseProvider = ({ children }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [totalExpenses, setTotalExpenses] = useState(0);
 
-  const fetchExpenses = useCallback(
-    async (month) => {
-      try {
-        const response = await getExpenses(
-          month.getMonth() + 1,
-          month.getFullYear()
-        );
-        setExpenses(response);
+  const fetchExpenses = async (month) => {
+    try {
+      const response = await getExpenses(
+        month.getMonth() + 1,
+        month.getFullYear()
+      );
+      setExpenses(response);
 
-        // Calculate total expenses
-        const total = response.reduce((acc, expense) => {
-          const numericAmount = parseFloat(expense.amount);
-          return acc + numericAmount;
-        }, 0);
-        setTotalExpenses(total); // Update total expenses
-      } catch (error) {
-        console.error("An error occurred", error);
-      }
-    },
-    [setExpenses]
-  );
+      // Calculate total expenses
+      const total = response.reduce((acc, expense) => {
+        const numericAmount = parseFloat(expense.amount);
+        return acc + numericAmount;
+      }, 0);
+      setTotalExpenses(total); // Update total expenses
+    } catch (error) {
+      console.error("An error occurred", error);
+    }
+  };
 
   useEffect(() => {
     const initialMonth = new Date();
     fetchExpenses(initialMonth);
-  }, [fetchExpenses]);
+  }, []);
 
   const handleDelete = async (expenseId) => {
     console.log("Deleting expense with ID:", expenseId);
