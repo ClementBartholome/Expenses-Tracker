@@ -15,7 +15,7 @@ export default function Budget() {
   } = useContext(BudgetContext);
 
   return (
-    <>
+    <div className="budget-card">
       <h2>Dépenses du mois de : {formatMonth(currentMonth)}</h2>
       {editingBudget ? (
         <>
@@ -53,6 +53,6 @@ export default function Budget() {
           {formatAmount(remainingBudget(budget, totalExpenses))}
         </h3>
       </div>
-    </>
+    </div>
   );
 }

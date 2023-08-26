@@ -8,6 +8,8 @@ export const ExpenseProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [totalExpenses, setTotalExpenses] = useState(0);
+  const [categories, setCategories] = useState([]);
+  const [originalExpenses, setOriginalExpenses] = useState([]);
 
   const fetchExpenses = async (month) => {
     try {
@@ -20,6 +22,13 @@ export const ExpenseProvider = ({ children }) => {
       // Calculate total expenses using the Utils function
       const total = calculateTotalExpenses(response);
       setTotalExpenses(total);
+
+      // Extract and set categories from expenses
+      const uniqueCategories = [
+        ...new Set(response.map((expense) => expense.category)),
+      ];
+      setCategories(uniqueCategories);
+      setOriginalExpenses(response);
     } catch (error) {
       console.error("An error occurred", error);
     }
@@ -59,9 +68,11 @@ export const ExpenseProvider = ({ children }) => {
         setCurrentMonth,
         totalExpenses,
         setTotalExpenses,
+        categories,
         fetchExpenses,
         handleDelete,
         handleAddExpense,
+        originalExpenses,
       }}>
       {children}
     </ExpenseContext.Provider>

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ExpenseContext from "../contexts/ExpenseContext";
 import { formatAmount, formatDate } from "../utils/Utils";
+import FilterButtons from "./FilterButtons";
 
 export default function ExpenseList() {
   const {
@@ -31,12 +32,13 @@ export default function ExpenseList() {
         <button onClick={handlePrevMonth}>Mois précédent</button>
         <button onClick={handleNextMonth}>Mois suivant</button>
       </div>
+      <FilterButtons />
       <ul>
         {expenses.map((expense) => (
           <li key={expense.id}>
             {expense.description}
-            <span>{formatAmount(expense.amount)}</span>
-            <span>{formatDate(expense.date)}</span>
+            <span className="bold">{formatAmount(expense.amount)}</span>
+            <span className="italic">{formatDate(expense.date)}</span>
             <span className="category">{expense.category}</span>
             <button
               className="delete-button"

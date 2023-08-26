@@ -18,50 +18,57 @@ export default function ExpenseForm() {
 
   return (
     <>
-      <h2 className="add-expense-header">
-        Ajouter une dépense
-        <button
-          className={`open-add-expense-form ${showForm ? "active" : ""}`}
-          onClick={() => setShowForm(!showForm)}></button>
-      </h2>
-      {showForm && (
-        <form
-          className="add-expense-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleAddExpense(description, amount, date, category);
-            resetForm();
-          }}>
-          <input
-            type="text"
-            placeholder="Nom"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Montant"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Catégorie"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
-          <input
-            type="date"
-            placeholder="Date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-          <button type="submit">Ajouter la dépense</button>
-          <button type="button" onClick={resetForm}>
-            Réinitialiser les champs
-          </button>
-        </form>
-      )}
+      <div className={`expense-form-container ${showForm ? "active" : ""}`}>
+        <h2 className="card add-expense-header">
+          Ajouter une dépense
+          <button
+            className={`open-add-expense-form ${showForm ? "active" : ""}`}
+            onClick={() => setShowForm(!showForm)}></button>
+        </h2>
+        {showForm && (
+          <div className="overlay">
+            <button
+              className={`open-add-expense-form ${showForm ? "active" : ""}`}
+              onClick={() => setShowForm(!showForm)}></button>
+            <form
+              className="add-expense-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleAddExpense(description, amount, date, category);
+                resetForm();
+              }}>
+              <input
+                type="text"
+                placeholder="Nom"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Montant"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Catégorie"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <input
+                type="date"
+                placeholder="Date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+              <button type="submit">Ajouter la dépense</button>
+              <button type="button" onClick={resetForm}>
+                Réinitialiser les champs
+              </button>
+            </form>
+          </div>
+        )}
+      </div>
     </>
   );
 }

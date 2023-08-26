@@ -2,10 +2,19 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-size: 16px;
-  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
   background-color: #f8f5f0;
-  color: #333;
+  color: #5d4037;
+}
+
+main {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 740px;
+  max-width: 420px;
 }
 
 input::-webkit-outer-spin-button,
@@ -23,20 +32,27 @@ h3 {
 }
 
 #root {
-  max-width: 600px;
+  max-width: 425px;
   display: flex;
   flex-direction: column;
   margin: 20px auto;
   align-items: center;
-  background: #f9dcc4;
   border-radius: 20px;
   padding: 20px;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 1);
 }
 
 header {
   align-self: flex-start;
-  margin-left: 20px;
+  background: linear-gradient(135deg, #f3c0a0, #f47c48);
+  border-radius: 15px;
+  padding: 10px 20px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
 }
 
 input,
@@ -59,11 +75,22 @@ button:hover {
   background-color: #d46a3c;
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
 ul {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 0;
+  overflow-y: scroll;
+  min-height: 35%;
+  padding-right: 10px;
 }
 
 li {
@@ -77,10 +104,19 @@ li {
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
 }
 
+.card {
+  background: linear-gradient(135deg, #f3c0a0, #f47c48);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 .add-expense-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: auto;
+  margin-bottom: 0;
 }
 
 .open-add-expense-form {
@@ -99,6 +135,7 @@ li {
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-left: auto;
 }
 
 .open-add-expense-form.active {
@@ -108,7 +145,7 @@ li {
 .open-add-expense-form:before,
 .open-add-expense-form:after {
   content: "";
-  width: 20px;
+  width: 10px;
   height: 2px;
   background-color: black;
   transform-origin: center;
@@ -127,6 +164,89 @@ li {
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  margin-top: 20px;
+}
+
+.add-expense-form input {
+  border: 1px solid grey;
+}
+
+.expense-form-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.expense-form-container.active .overlay {
+  transform: translateY(0);
+}
+
+/* Budget card */
+
+.budget-card {
+  background: linear-gradient(135deg, #ffb88c, #ff5a5a);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  min-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.budget-card h2,
+.budget-card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  max-height: 31px;
+}
+
+.budget-card .budget {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.budget-card .budget h3 {
+  font-size: 1.2rem;
+}
+
+.budget-card .budget button {
+  background-color: transparent;
+  border: 2px solid white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.budget-card .budget button:hover {
+  background-color: white;
+  color: #ff5a5a;
+}
+
+.budget-card .budget-recap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.budget-card .budget-recap h3 {
+  font-size: 1.2rem;
 }
 
 .delete-button {
@@ -154,6 +274,7 @@ li {
   background-color: #f47c48;
   color: #ffffff;
   border-radius: 4px;
+  margin-left: auto;
 }
 
 .budget {
@@ -196,4 +317,41 @@ li {
 .month-buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.expense-form-container.active .overlay {
+  transform: translateY(0);
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #d46a3c;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5d4037;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8a5f51;
+}
+
+.active-filter {
+  background-color: #8a5f51;
+  color: white;
 }
