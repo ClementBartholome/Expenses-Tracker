@@ -16,7 +16,7 @@ export default function Budget() {
 
   return (
     <div className="budget-card">
-      <h2>Dépenses du mois de : {formatMonth(currentMonth)}</h2>
+      <h2>{formatMonth(currentMonth)}</h2>
       {editingBudget ? (
         <>
           <div className="budget">
@@ -47,7 +47,7 @@ export default function Budget() {
         </>
       )}
       <div className="budget-recap">
-        <h3>Total des dépenses : {formatAmount(totalExpenses)}</h3>
+        <h3>Dépenses : {formatAmount(totalExpenses)}</h3>
         <h3>
           Budget restant :{" "}
           {formatAmount(remainingBudget(budget, totalExpenses))}

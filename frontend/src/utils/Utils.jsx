@@ -12,7 +12,11 @@ export function formatDate(date) {
 
 export function formatMonth(date) {
   const options = { year: "numeric", month: "long" };
-  return date.toLocaleDateString(undefined, options);
+  const formattedDate = date.toLocaleDateString(undefined, options);
+  const formattedMonth =
+    formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+
+  return formattedMonth;
 }
 
 export function remainingBudget(budget, totalExpenses) {

@@ -1,3 +1,12 @@
+:root {
+  --text-color: #5d4037;
+  --primary-color: #f47c48;
+  --secondary-color: #f3c0a0;
+  --gradient: linear-gradient(135deg, #f3c0a0, #f47c48);
+  --button-hover: #d46a3c;
+  --button-hover-secondary: #ff5a5a;
+}
+
 html,
 body {
   margin: 0;
@@ -5,7 +14,7 @@ body {
   font-size: 14px;
   font-family: "Poppins", sans-serif;
   background-color: #f8f5f0;
-  color: #5d4037;
+  color: var(--text-color);
 }
 
 main {
@@ -44,7 +53,7 @@ h3 {
 
 header {
   align-self: flex-start;
-  background: linear-gradient(135deg, #f3c0a0, #f47c48);
+  background: var(linear-gradient(135deg, #f3c0a0, #f47c48));
   border-radius: 15px;
   padding: 10px 20px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
@@ -66,13 +75,13 @@ button {
 
 button {
   cursor: pointer;
-  background-color: #f47c48;
+  background-color: var(--primary-color);
   color: white;
   transition: background-color 0.2s ease-in-out;
 }
 
 button:hover {
-  background-color: #d46a3c;
+  background-color: var(--button-hover);
 }
 
 .bold {
@@ -89,7 +98,7 @@ ul {
   gap: 10px;
   padding: 0;
   overflow-y: scroll;
-  min-height: 35%;
+  min-height: 38%;
   padding-right: 10px;
 }
 
@@ -105,7 +114,7 @@ li {
 }
 
 .card {
-  background: linear-gradient(135deg, #f3c0a0, #f47c48);
+  background: var(--gradient);
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
@@ -198,7 +207,7 @@ li {
 /* Budget card */
 
 .budget-card {
-  background: linear-gradient(135deg, #ffb88c, #ff5a5a);
+  background: var(--gradient);
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -236,12 +245,11 @@ li {
 
 .budget-card .budget button:hover {
   background-color: white;
-  color: #ff5a5a;
+  color: var(--button-hover-secondary);
 }
 
 .budget-card .budget-recap {
   display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
@@ -250,7 +258,7 @@ li {
 }
 
 .delete-button {
-  background-color: #f47c48;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   padding: 10px;
@@ -271,7 +279,7 @@ li {
 
 .category {
   padding: 4px 8px;
-  background-color: #f47c48;
+  background-color: var(--primary-color);
   color: #ffffff;
   border-radius: 4px;
   margin-left: auto;
@@ -294,12 +302,12 @@ li {
 }
 
 .budget button {
-  background-color: #f47c48;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .budget button:hover {
-  background-color: #d46a3c;
+  background-color: var(--button-hover);
 }
 
 .budget input {
@@ -326,6 +334,17 @@ li {
 .filter-buttons {
   display: flex;
   gap: 10px;
+  overflow-x: scroll;
+  padding-bottom: 5px;
+}
+
+.filter-buttons button {
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.filter-buttons::-webkit-scrollbar {
+  height: 10px;
 }
 
 /* Scrollbar */
@@ -336,13 +355,13 @@ li {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #d46a3c;
+  background: var(--button-hover);
   border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #5d4037;
+  background: var(--text-color);
   border-radius: 5px;
 }
 
