@@ -10,11 +10,12 @@ class Budget extends AbstractEntity implements JsonSerializable {
     private $budget;
 
     public function jsonSerialize() {
+        // Return an array representing the object's data in JSON format
         return [
-            'id' => $this->getId(),
-            'month' => $this->getMonth(),
-            'year' => $this->getYear(),
-            'budget' => $this->getBudget(),
+            'id' => $this->getId(), // Serialize the ID
+            'month' => $this->getMonth(), // Serialize the month
+            'year' => $this->getYear(), // Serialize the year
+            'budget' => $this->getBudget(), // Serialize the budget amount
         ];
     }
 

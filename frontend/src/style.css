@@ -18,12 +18,15 @@ body {
 }
 
 main {
-  margin: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin: 20px auto;
+  padding: 20px;
   height: 740px;
-  max-width: 420px;
+  max-width: 425px;
+  border-radius: 20px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 1);
 }
 
 input::-webkit-outer-spin-button,
@@ -38,17 +41,6 @@ h1 {
 
 h3 {
   font-size: 1.2rem;
-}
-
-#root {
-  max-width: 425px;
-  display: flex;
-  flex-direction: column;
-  margin: 20px auto;
-  align-items: center;
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 1);
 }
 
 header {
@@ -211,7 +203,6 @@ li {
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  min-width: 380px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -334,8 +325,9 @@ li {
 .filter-buttons {
   display: flex;
   gap: 10px;
-  overflow-x: scroll;
+  overflow-x: hidden;
   padding-bottom: 5px;
+  transition: scroll 0.3s ease-in-out;
 }
 
 .filter-buttons button {
