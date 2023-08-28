@@ -28,6 +28,7 @@ export default function ExpenseList() {
 
   return (
     <>
+      <h2 className="margin-layout">Transactions récentes</h2>
       <div className="month-buttons">
         <button onClick={handlePrevMonth}>Mois précédent</button>
         <button onClick={handleNextMonth}>Mois suivant</button>
@@ -36,9 +37,13 @@ export default function ExpenseList() {
       <ul>
         {expenses.map((expense) => (
           <li key={expense.id}>
-            {expense.description}
-            <span className="bold">{formatAmount(expense.amount)}</span>
-            <span className="italic">{formatDate(expense.date)}</span>
+            <div className="expense-description flex-column">
+              <span title={expense.description}>{expense.description}</span>
+              <span className="italic">{formatDate(expense.date)}</span>
+            </div>
+            <span className="expense-amount bold">
+              {formatAmount(expense.amount)}
+            </span>
             <span className="category">{expense.category}</span>
             <button
               className="delete-button"

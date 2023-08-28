@@ -54,6 +54,7 @@ export default function ExpenseForm() {
                 placeholder="Catégorie"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+                maxLength={9}
               />
               <input
                 type="date"
