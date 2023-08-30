@@ -1,6 +1,4 @@
 <?php
-require_once 'Model.php';
-require_once "Controllers/Expense.php";
 
 class ExpenseManager extends Model {
 

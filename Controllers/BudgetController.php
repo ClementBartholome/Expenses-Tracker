@@ -1,5 +1,4 @@
 <?php
-require_once 'models/BudgetManager.php';
 
 class BudgetController {
     private BudgetManager $budgetManager;

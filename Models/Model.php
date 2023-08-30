@@ -1,5 +1,4 @@
 <?php
-require_once 'Config/Configuration.php';
 
 abstract class Model {
     private static $bdd;

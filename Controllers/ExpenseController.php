@@ -1,5 +1,4 @@
 <?php
-require_once 'models/ExpenseManager.php';
 
 class ExpenseController {
     private ExpenseManager $expenseManager;

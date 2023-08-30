@@ -1,6 +1,4 @@
 <?php
-require_once 'Controllers/ExpenseController.php';
-require_once "Controllers/BudgetController.php";
 
 class Router {
 

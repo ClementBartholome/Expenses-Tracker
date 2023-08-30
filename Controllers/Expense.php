@@ -1,8 +1,5 @@
 <?php 
 
-require_once 'Models/Model.php';
-require_once "AbstractEntity.php";
-
 class Expense extends AbstractEntity implements JsonSerializable {
     private $id;
     private $description;

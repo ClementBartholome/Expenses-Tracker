@@ -2,8 +2,7 @@
 
 session_start();
 
-require_once "Controllers/ExpenseController.php";
-require_once "Routes/Router.php";
+require_once "Config/autoload.php";
 
 $router = new Router();
 $router->routerRequest();
