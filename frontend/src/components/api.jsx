@@ -99,3 +99,16 @@ export async function addOrUpdateBudget(month, year, budget) {
     throw error;
   }
 }
+
+export async function getExpensesByCategory(month, year) {
+  try {
+    const response = await fetch(
+      `${baseUrl}?action=get-expenses-by-category&month=${month}&year=${year}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("An error occurred", error);
+    throw error;
+  }
+}

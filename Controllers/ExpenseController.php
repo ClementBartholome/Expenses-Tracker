@@ -36,4 +36,9 @@ class ExpenseController {
             echo "Error deleting expense";
         }
     }
+
+    public function getExpensesByCategory($month, $year) {
+        $expenses = $this->expenseManager->getExpensesByCategory($month, $year);
+        echo json_encode($expenses); 
+    }
 }

@@ -30,6 +30,11 @@ class Router {
                         $year = intval($_GET['year']);
                         $this->ctrlbudget->getBudgetForMonth($month, $year);
                         break;
+                    case "get-expenses-by-category":
+                        $month = intval($_GET['month']);
+                        $year = intval($_GET['year']);
+                        $this->ctrlexpense->getExpensesByCategory($month, $year);
+                        break;
                     default:
                         throw new Exception("Action non valide");
                 }

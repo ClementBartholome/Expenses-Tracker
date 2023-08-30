@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import ExpenseContext from "../contexts/ExpenseContext";
 import { formatAmount, formatDate } from "../utils/Utils";
 import FilterButtons from "./FilterButtons";
@@ -44,7 +45,9 @@ export default function ExpenseList() {
             <span className="expense-amount bold">
               {formatAmount(expense.amount)}
             </span>
-            <span className="category">{expense.category}</span>
+            <Link to={`/${expense.category}`}>
+              <span className="category">{expense.category}</span>
+            </Link>
             <button
               className="delete-button"
               onClick={() => handleDelete(expense.id)}></button>

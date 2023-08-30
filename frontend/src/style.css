@@ -15,6 +15,10 @@ body {
   color: var(--text-color);
 }
 
+a {
+  text-decoration: none;
+}
+
 main {
   display: flex;
   flex-direction: column;
