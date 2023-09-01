@@ -9,7 +9,7 @@ class ExpenseManager extends Model {
      * @param int $year The year.
      * @return array An array of expenses.
      */
-    public function getExpensesForMonth(int $month, int $year): array {
+    public function getMonthlyExpenses(int $month, int $year): array {
         $sql = "SELECT id, description, amount, date, category FROM expenses WHERE MONTH(date) = ? AND YEAR(date) = ? ORDER BY date DESC" ;
         $params = array($month, $year);
         $stmt = $this->executeRequest($sql, $params);
@@ -64,29 +64,5 @@ class ExpenseManager extends Model {
         } catch (PDOException $e) {
             return false;
         }
-    }
-
-    /**
-     * Get expenses by category for a specific month and year.
-     * 
-     * @param int $month The month (1-12).
-     * @param int $year The year.
-     * @return array An array of expenses.
-     */
-
-    public function getExpensesByCategory(int $month, int $year): array {
-        $sql = "SELECT category, SUM(amount) AS total FROM expenses WHERE MONTH(date) = ? AND YEAR(date) = ? GROUP BY category";
-        $params = array($month, $year);
-        $stmt = $this->executeRequest($sql, $params);
-        $expensesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-        $expenses = [];
-        foreach ($expensesData as $expenseData) {
-            $expense = new Expense();
-            $expense->hydrate($expenseData);
-            $expenses[] = $expense;
-        }
-    
-        return $expenses;
     }
 }

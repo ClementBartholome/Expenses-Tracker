@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getExpenses, deleteExpense, addExpense } from "../components/api";
+import { deleteExpense, addExpense, getMonthlyExpenses } from "../components/api";
 import { calculateTotalExpenses } from "../utils/Utils";
 
 const ExpenseContext = createContext();
@@ -13,7 +13,7 @@ export const ExpenseProvider = ({ children }) => {
 
   const fetchExpenses = async (month) => {
     try {
-      const response = await getExpenses(
+      const response = await getMonthlyExpenses(
         month.getMonth() + 1,
         month.getFullYear()
       );

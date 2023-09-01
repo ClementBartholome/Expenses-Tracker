@@ -41,7 +41,7 @@ class Router {
             } else if (isset($_GET['month']) && isset($_GET['year'])) {
                 $month = intval($_GET['month']);
                 $year = intval($_GET['year']);
-                $this->ctrlexpense->getExpensesForMonth($month, $year);
+                $this->ctrlexpense->getMonthlyExpenses($month, $year);
             } else {
                 throw new Exception("Action non valide");
             }

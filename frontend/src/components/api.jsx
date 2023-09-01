@@ -1,6 +1,6 @@
 const baseUrl = "http://localhost/expense_tracker/";
 
-export async function getExpenses(month = null, year = null) {
+export async function getMonthlyExpenses(month = null, year = null) {
   try {
     const now = new Date();
     const currentMonth = now.getMonth() + 1;
@@ -94,19 +94,6 @@ export async function addOrUpdateBudget(month, year, budget) {
     } else {
       console.error("Error adding/updating budget");
     }
-  } catch (error) {
-    console.error("An error occurred", error);
-    throw error;
-  }
-}
-
-export async function getExpensesByCategory(month, year) {
-  try {
-    const response = await fetch(
-      `${baseUrl}?action=get-expenses-by-category&month=${month}&year=${year}`
-    );
-    const data = await response.json();
-    return data;
   } catch (error) {
     console.error("An error occurred", error);
     throw error;

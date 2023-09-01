@@ -6,8 +6,8 @@ class ExpenseController {
     public function __construct() {
         $this->expenseManager = new ExpenseManager();
     }
-    public function getExpensesForMonth(int $month, int $year) {
-        $expenses = $this->expenseManager->getExpensesForMonth($month, $year);
+    public function getMonthlyExpenses(int $month, int $year) {
+        $expenses = $this->expenseManager->getMonthlyExpenses($month, $year);
         echo json_encode($expenses); 
     }
 
@@ -35,10 +35,5 @@ class ExpenseController {
         } else {
             echo "Error deleting expense";
         }
-    }
-
-    public function getExpensesByCategory($month, $year) {
-        $expenses = $this->expenseManager->getExpensesByCategory($month, $year);
-        echo json_encode($expenses); 
     }
 }

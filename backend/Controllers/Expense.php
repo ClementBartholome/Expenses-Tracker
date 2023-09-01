@@ -1,11 +1,11 @@
 <?php 
 
 class Expense extends AbstractEntity implements JsonSerializable {
-    private $id;
-    private $description;
-    private $amount; 
-    private $date;   
-    private $category;
+    private $id = 0; 
+    private $description = ''; 
+    private $amount = 0.0; 
+    private $date = ''; 
+    private $category = '';
 
     public function jsonSerialize() {
         return [

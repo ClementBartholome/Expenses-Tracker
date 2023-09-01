@@ -29,3 +29,22 @@ export function calculateTotalExpenses(expenses) {
     return total + numericAmount;
   }, 0);
 }
+
+export function formatMonthToFrench(month) {
+  const monthNames = [
+    "Janv",
+    "Févr",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juil",
+    "Août",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Déc",
+  ];
+
+  return monthNames[month - 1];
+}

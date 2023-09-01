@@ -1,48 +1,69 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ExpenseContext from "../contexts/ExpenseContext";
-import { calculateTotalExpenses } from "../utils/Utils";
+import { calculateTotalExpenses, formatMonthToFrench } from "../utils/Utils";
+import { getMonthlyExpenses } from "../components/api"; // Import the API function
+import ExpenseChart from "../components/ExpenseChart";
 
 export default function ViewCategory() {
   const { category } = useParams();
-  const [categoryExpenses, setCategoryExpenses] = useState([]);
-  const { originalExpenses, setTotalExpenses } = useContext(ExpenseContext);
 
-  const fetchExpensesByCategory = (category) => {
-    const filteredExpenses = originalExpenses.filter(
-      (expense) => expense.category === category
-    );
-    setCategoryExpenses(filteredExpenses);
-    const total = calculateTotalExpenses(filteredExpenses);
-    setTotalExpenses(total);
-  };
+  const [categoryTotals, setCategoryTotals] = useState({});
 
   useEffect(() => {
-    fetchExpensesByCategory(category);
-  }, [categoryExpenses, category]);
+    // Function to calculate the total expenses for a category for each month
+    const calculateCategoryTotals = async () => {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const totals = {};
+
+      // Loop through each month of the current year
+      for (let month = 1; month <= 12; month++) {
+        // Fetch monthly expenses for the current month and year for the selected category
+        const data = await getMonthlyExpenses(month, currentYear);
+
+        // Filter expenses for the selected category
+        const filteredExpenses = data.filter(
+          (expense) => expense.category === category
+        );
+
+        // Calculate the total expenses for the selected category
+        const total = calculateTotalExpenses(filteredExpenses);
+
+        // Get the formatted month name using the formatMonthToFrench function
+        const monthName = formatMonthToFrench(month);
+
+        // Store the total in the totals object
+        totals[monthName] = total;
+      }
+
+      // Transform the data for Chart.js
+      const months = [...Object.keys(totals)]; // Extract month names
+      const values = Object.values(totals); // Extract values
+
+      const chartData = {
+        labels: months,
+        datasets: [
+          {
+            months: months,
+            data: values,
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      // Set the categoryTotals state with the transformed data
+      setCategoryTotals(chartData);
+    };
+
+    calculateCategoryTotals();
+  }, [category]);
 
   return (
     <main>
-      {categoryExpenses.length > 0 ? (
-        <div className="margin-layout">
-          <h2>{category}</h2>
-          <h3>Dépenses totales</h3>
-          <p>{calculateTotalExpenses(categoryExpenses)}</p>
-          <ul>
-            {categoryExpenses.map((expense) => (
-              <li key={expense.id}>
-                <div className="expense-description flex-column">
-                  <span title={expense.description}>{expense.description}</span>
-                  <span className="italic">{expense.date}</span>
-                </div>
-                <span className="expense-amount bold">{expense.amount}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <h2 className="margin-layout">No expenses for this category</h2>
-      )}
+      <h2>{category}</h2>
+      <ExpenseChart data={categoryTotals} />
     </main>
   );
 }
