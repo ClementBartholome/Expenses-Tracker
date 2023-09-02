@@ -47,6 +47,7 @@ export async function deleteExpense(expenseId) {
   try {
     const response = await fetch(`${baseUrl}?action=delete-expense`, {
       method: "DELETE",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
