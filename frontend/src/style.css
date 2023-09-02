@@ -121,7 +121,7 @@ ul {
   margin: 0 20px;
   gap: 10px;
   padding: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   min-height: 39%;
   padding-right: 10px;
 }
@@ -463,4 +463,27 @@ li {
 .active-filter {
   background: var(--accent);
   color: white;
+}
+
+.fit-content {
+  width: fit-content;
+  height: 100px;
+}
+
+.wd-50 {
+  width: 50%;
+}
+
+.category-cards {
+  display: flex;
+}
+
+.category-cards .card {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.category-cards .card h3 {
+  font-size: 1rem;
 }
