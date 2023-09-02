@@ -87,18 +87,22 @@ export default function ViewCategory() {
       />
       <h2 className="margin-layout">{category}</h2>
       <ExpenseChart data={categoryTotals} />
-      <ul className="flex-column-reverse">
-        {categoryExpenses.map((expense) => (
-          <li key={expense.id}>
-            <div className="expense-description flex-column">
-              <span title={expense.description}>{expense.description}</span>
-              <span className="italic">{formatDate(expense.date)}</span>
-            </div>
-            <span className="expense-amount bold">
-              {formatAmount(expense.amount)}
-            </span>
-          </li>
-        ))}
+      <h2 className="margin-layout">Dernières dépenses</h2>
+      <ul className="mb-20">
+        {categoryExpenses
+          .slice() // Create a copy of the array
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .map((expense) => (
+            <li key={expense.id}>
+              <div className="expense-description flex-column">
+                <span title={expense.description}>{expense.description}</span>
+                <span className="italic">{formatDate(expense.date)}</span>
+              </div>
+              <span className="expense-amount bold">
+                {formatAmount(expense.amount)}
+              </span>
+            </li>
+          ))}
       </ul>
     </main>
   );
