@@ -23,20 +23,23 @@ export default function ExpenseForm() {
           Ajouter une dépense
           <button
             className={`open-add-expense-form ${showForm ? "active" : ""}`}
-            onClick={() => setShowForm(!showForm)}></button>
+            onClick={() => setShowForm(!showForm)}
+          ></button>
         </h2>
         {showForm && (
           <div className="overlay">
             <button
               className={`open-add-expense-form ${showForm ? "active" : ""}`}
-              onClick={() => setShowForm(!showForm)}></button>
+              onClick={() => setShowForm(!showForm)}
+            ></button>
             <form
               className="add-expense-form"
               onSubmit={(e) => {
                 e.preventDefault();
                 handleAddExpense(description, amount, date, category);
                 resetForm();
-              }}>
+              }}
+            >
               <input
                 type="text"
                 placeholder="Nom"
@@ -54,7 +57,7 @@ export default function ExpenseForm() {
                 placeholder="Catégorie"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                maxLength={9}
+                maxLength={10}
               />
               <input
                 type="date"

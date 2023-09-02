@@ -1,8 +1,8 @@
 :root {
   --text-color: black;
   --budget-text: white;
-  --accent: #6246ea;
-  --gradient: linear-gradient(90deg, #e7505e, #cb5891 35%, #a364dc);
+  --accent: #4286f4;
+  --gradient: linear-gradient(to right, #373b44, #4286f4);
 }
 
 html,
@@ -91,7 +91,10 @@ button:hover {
 
 .flex-column-reverse {
   flex-direction: column-reverse;
-  justify-content: flex-end;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
 }
 
 canvas {
@@ -131,7 +134,7 @@ li {
   border: 1px solid #e2e2e2;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2);
   flex-wrap: wrap;
 }
 
@@ -174,7 +177,8 @@ li {
 }
 
 .open-add-expense-form:hover {
-  background-color: #503cb0;
+  background-color: #373b44;
+  transition: ease-in-out 0.2s;
 }
 
 .open-add-expense-form.active {
@@ -360,6 +364,30 @@ li {
   color: #ffffff;
   border-radius: 4px;
   margin-left: auto;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  transition: all 0.5s;
+}
+
+.category:after {
+  content: "»";
+  position: absolute;
+  opacity: 0;
+  top: 4px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.category:hover {
+  padding-right: 14px;
+  padding-left: 8px;
+}
+
+.category:hover:after {
+  opacity: 1;
+  right: 3px;
 }
 
 .budget {
@@ -423,13 +451,13 @@ li {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--accent);
-  background: #2d1e79;
+  background: #28549b;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #7a61f5;
+  background: #204a80;
 }
 
 .active-filter {
