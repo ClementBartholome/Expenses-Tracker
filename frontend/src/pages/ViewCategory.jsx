@@ -9,7 +9,11 @@ import {
 import { getMonthlyExpenses } from "../components/api";
 import ExpenseChart from "../components/ExpenseChart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faCalendar,
+  faChartLine,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function ViewCategory() {
   const { category } = useParams();
@@ -112,12 +116,28 @@ export default function ViewCategory() {
         {/* Display the total for the last 30 days */}
         <div className="card margin-layout wd-50 fit-content">
           <h3>30 derniers jours</h3>
-          <p className="bold">{formatAmount(last30DaysTotal)}</p>
+          <div className="flex-row center space-b">
+            <p className="bold">{formatAmount(last30DaysTotal)}</p>
+            <FontAwesomeIcon
+              icon={faCalendar}
+              style={{
+                fontSize: "1.5rem",
+              }}
+            />
+          </div>
         </div>
         {/* Display the average monthly expense */}
         <div className="card margin-layout wd-50 fit-content">
           <h3>Moyenne Mensuelle</h3>
-          <p className="bold">{formatAmount(monthlyAverage)}</p>
+          <div className="flex-row center space-b">
+            <p className="bold">{formatAmount(monthlyAverage)}</p>
+            <FontAwesomeIcon
+              icon={faChartLine}
+              style={{
+                fontSize: "1.5rem",
+              }}
+            />
+          </div>
         </div>
       </div>
       <ExpenseChart data={categoryTotals} />

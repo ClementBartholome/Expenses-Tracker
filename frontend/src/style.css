@@ -93,6 +93,19 @@ button:hover {
   flex-direction: column-reverse;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.center {
+  align-items: center;
+}
+
+.space-b {
+  justify-content: space-between;
+}
+
 .mb-20 {
   margin-bottom: 20px;
 }
@@ -482,6 +495,8 @@ li {
   padding: 10px;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(to right, #373b44, #4286f4);
+  color: white;
 }
 
 .category-cards .card h3 {
