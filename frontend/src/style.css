@@ -22,7 +22,7 @@ a {
 main {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 15px;
   margin: auto;
   height: 100vh;
   max-width: 425px;
