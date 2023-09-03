@@ -142,7 +142,7 @@ ul {
 li {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 20px;
   border: 1px solid #e2e2e2;
   background-color: #fff;

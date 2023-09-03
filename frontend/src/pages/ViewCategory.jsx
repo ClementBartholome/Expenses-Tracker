@@ -28,14 +28,14 @@ export default function ViewCategory() {
   const currentYear = now.getFullYear();
   const totals = {};
 
-  const localCategoryExpenses = [];
-
   useEffect(() => {
     fetchMonthlyExpenses();
   }, []);
 
   // Function to calculate the total expenses for a category for each month
   const fetchMonthlyExpenses = async () => {
+    const localCategoryExpenses = [];
+
     // Loop through each month of the current year
     for (let month = 1; month <= 12; month++) {
       const data = await getMonthlyExpenses(month, currentYear);
@@ -81,10 +81,11 @@ export default function ViewCategory() {
     // Calculate the total for the last 30 days
     const last30DaysExpenses = localCategoryExpenses.filter((expense) => {
       const thirtyDaysAgo = new Date();
-      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 31);
       return new Date(expense.date) >= thirtyDaysAgo;
     });
     const last30DaysTotal = calculateTotalExpenses(last30DaysExpenses);
+    setLast30DaysTotal(last30DaysTotal);
 
     // Calculate the average monthly expense for the last six months
     const lastSixMonths = [];
@@ -107,7 +108,6 @@ export default function ViewCategory() {
     const monthlyAverage =
       lastSixMonths.reduce((acc, entry) => acc + entry.total, 0) / 6;
 
-    setLast30DaysTotal(last30DaysTotal);
     setMonthlyAverage(monthlyAverage);
   };
 
