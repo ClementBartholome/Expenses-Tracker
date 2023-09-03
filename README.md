@@ -12,5 +12,6 @@ J'ai entrepris ce projet afin de mettre en pratique mes récentes compétences a
 
 ## Screenshots 
 
-![Screen](https://storage.googleapis.com/github-clementbartholome/2023-08-28%2018_00_21-Window.png)
+![Screen](https://storage.googleapis.com/images_portfolio_steam/project_budget.png)
+![Screen](https://storage.googleapis.com/images_portfolio_steam/project_budget%20(2).png)
 
