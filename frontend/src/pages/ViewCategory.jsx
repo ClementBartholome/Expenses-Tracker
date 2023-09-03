@@ -20,83 +20,96 @@ export default function ViewCategory() {
 
   const [categoryTotals, setCategoryTotals] = useState({});
   const [categoryExpenses, setCategoryExpenses] = useState([]);
-  const [last30DaysTotal, setLast30DaysTotal] = useState(0); // State to store the total for the last 30 days
-  const [monthlyAverage, setMonthlyAverage] = useState(0); // State to store the average monthly total
+  const [last30DaysTotal, setLast30DaysTotal] = useState(0);
+  const [monthlyAverage, setMonthlyAverage] = useState(0);
+
+  const now = new Date();
+  const currentMonth = now.getMonth() + 1; // Les mois sont indexés à partir de 0, donc ajoutez 1 pour obtenir le mois actuel
+  const currentYear = now.getFullYear();
+  const totals = {};
+
+  const localCategoryExpenses = [];
 
   useEffect(() => {
-    // Function to calculate the total expenses for a category for each month
-    const calculateCategoryTotals = async () => {
-      const now = new Date();
-      const currentYear = now.getFullYear();
-      const totals = {};
+    fetchMonthlyExpenses();
+  }, []);
 
-      const localCategoryExpenses = [];
+  // Function to calculate the total expenses for a category for each month
+  const fetchMonthlyExpenses = async () => {
+    // Loop through each month of the current year
+    for (let month = 1; month <= 12; month++) {
+      const data = await getMonthlyExpenses(month, currentYear);
 
-      // Loop through each month of the current year
-      for (let month = 1; month <= 12; month++) {
-        const data = await getMonthlyExpenses(month, currentYear);
-
-        // Filter expenses for the selected category
-        const filteredExpenses = data.filter(
-          (expense) => expense.category === category
-        );
-
-        localCategoryExpenses.push(...filteredExpenses);
-
-        // Calculate the total expenses for the selected category
-        const total = calculateTotalExpenses(filteredExpenses);
-
-        // Get the formatted month name using the formatMonthToFrench function
-        const monthName = formatMonthToFrench(month);
-
-        // Store the total for the month in the totals object
-        totals[monthName] = total;
-      }
-
-      setCategoryExpenses(localCategoryExpenses);
-
-      // Calculate the total for the last 30 days
-      const last30DaysExpenses = localCategoryExpenses.filter((expense) => {
-        const thirtyDaysAgo = new Date();
-        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-        return new Date(expense.date) >= thirtyDaysAgo;
-      });
-      const last30DaysTotal = calculateTotalExpenses(last30DaysExpenses);
-      setLast30DaysTotal(last30DaysTotal);
-
-      // Calculate the average monthly expense
-      // Calculate the average monthly expense for the last six months
-      const lastSixMonths = Object.keys(totals).slice(-6);
-      const totalLastSixMonths = lastSixMonths.reduce(
-        (acc, month) => acc + totals[month],
-        0
+      // Filter expenses for the selected category
+      const filteredExpenses = data.filter(
+        (expense) => expense.category === category
       );
-      const monthlyAverage = totalLastSixMonths / lastSixMonths.length;
 
-      setMonthlyAverage(monthlyAverage);
+      localCategoryExpenses.push(...filteredExpenses);
 
-      // Transform the data for Chart.js
-      const months = [...Object.keys(totals)]; // Extract month names
-      const values = Object.values(totals); // Extract values
+      // Calculate the total expenses for the selected category
+      const total = calculateTotalExpenses(filteredExpenses);
 
-      const chartData = {
-        labels: months,
-        datasets: [
-          {
-            months: months,
-            data: values,
-            backgroundColor: "rgba(75, 192, 192, 0.2)",
-            borderColor: "rgba(75, 192, 192, 1)",
-            borderWidth: 1,
-          },
-        ],
-      };
+      // Get the formatted month name using the formatMonthToFrench function
+      const monthName = formatMonthToFrench(month);
 
-      setCategoryTotals(chartData);
+      // Store the total for the month in the totals object
+      totals[monthName] = total;
+    }
+
+    setCategoryExpenses(localCategoryExpenses);
+
+    // Transform the data for Chart.js
+    const months = [...Object.keys(totals)]; // Extract month names
+    const values = Object.values(totals); // Extract values
+
+    const chartData = {
+      labels: months,
+      datasets: [
+        {
+          months: months,
+          data: values,
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
     };
 
-    calculateCategoryTotals();
-  }, []);
+    setCategoryTotals(chartData);
+
+    // Calculate the total for the last 30 days
+    const last30DaysExpenses = localCategoryExpenses.filter((expense) => {
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      return new Date(expense.date) >= thirtyDaysAgo;
+    });
+    const last30DaysTotal = calculateTotalExpenses(last30DaysExpenses);
+
+    // Calculate the average monthly expense for the last six months
+    const lastSixMonths = [];
+    for (let i = 0; i < 6; i++) {
+      let month = currentMonth - i;
+      let year = currentYear;
+
+      // If the month is less than 1, it means we have to go back to the previous year
+      if (month <= 0) {
+        month += 12; // If the month is 0, it means we are in January, so add 12 to get December
+        year -= 1;
+      }
+
+      const monthName = formatMonthToFrench(month);
+      const totalForMonth = totals[monthName] || 0;
+
+      lastSixMonths.unshift({ month: monthName, year, total: totalForMonth });
+    }
+
+    const monthlyAverage =
+      lastSixMonths.reduce((acc, entry) => acc + entry.total, 0) / 6;
+
+    setLast30DaysTotal(last30DaysTotal);
+    setMonthlyAverage(monthlyAverage);
+  };
 
   return (
     <main>
