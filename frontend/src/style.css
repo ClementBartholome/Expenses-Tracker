@@ -22,11 +22,10 @@ a {
 main {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 30px;
   margin: auto;
   height: 100vh;
   max-width: 425px;
-  border-radius: 15px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 1);
 }
 
@@ -135,7 +134,7 @@ ul {
   gap: 10px;
   padding: 0;
   overflow-y: auto;
-  min-height: 39%;
+  min-height: 35%;
   padding-right: 10px;
 }
 
@@ -152,7 +151,6 @@ li {
 }
 
 .card {
-  border-radius: 15px;
   padding: 17px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 1);
 }
@@ -497,6 +495,8 @@ li {
   flex-direction: column;
   background: linear-gradient(to right, #373b44, #4286f4);
   color: white;
+  border-radius: 15px;
+  box-shadow: none;
 }
 
 .category-cards .card h3 {
