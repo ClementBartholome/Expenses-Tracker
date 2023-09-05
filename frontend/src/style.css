@@ -22,11 +22,10 @@ a {
 main {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   margin: auto;
   height: 100vh;
   max-width: 425px;
-  border-radius: 15px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 1);
 }
 
@@ -93,6 +92,19 @@ button:hover {
   flex-direction: column-reverse;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.center {
+  align-items: center;
+}
+
+.space-b {
+  justify-content: space-between;
+}
+
 .mb-20 {
   margin-bottom: 20px;
 }
@@ -121,15 +133,15 @@ ul {
   margin: 0 20px;
   gap: 10px;
   padding: 0;
-  overflow-y: scroll;
-  min-height: 39%;
+  overflow-y: auto;
+  min-height: 36%;
   padding-right: 10px;
 }
 
 li {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 20px;
   border: 1px solid #e2e2e2;
   background-color: #fff;
@@ -139,7 +151,6 @@ li {
 }
 
 .card {
-  border-radius: 15px;
   padding: 17px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 1);
 }
@@ -463,4 +474,31 @@ li {
 .active-filter {
   background: var(--accent);
   color: white;
+}
+
+.fit-content {
+  width: fit-content;
+  height: 100px;
+}
+
+.wd-50 {
+  width: 50%;
+}
+
+.category-cards {
+  display: flex;
+}
+
+.category-cards .card {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to right, #373b44, #4286f4);
+  color: white;
+  border-radius: 15px;
+  box-shadow: none;
+}
+
+.category-cards .card h3 {
+  font-size: 1rem;
 }
