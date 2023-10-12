@@ -34,20 +34,25 @@ class ExpenseManager extends Model {
      * @param string $date The date of the expense in "Y-m-d" format.
      * @return bool True if the expense was added successfully, false otherwise.
      */
-    public function addExpense(string $description, float $amount, string $date, string $category): bool {
+    public function addExpense(string $description, float $amount, string $date, string $category, int $month, int $year): bool {
+        // Format the date to match the "Y-m-d" format expected by the database
         $formattedDate = date("Y-m-d", strtotime($date));
-        $sql = "INSERT INTO expenses (description, amount, date, category) VALUES (?, ?, ?, ?)";
-        $params = array($description, $amount, $formattedDate, $category);
-        
+    
+        $sql = "INSERT INTO expenses (description, amount, date, category, monthly_budgets_id)
+                VALUES (?, ?, ?, ?, 
+                (SELECT id FROM monthly_budgets WHERE month = ? AND year = ?))";
+    
+        $params = array($description, $amount, $formattedDate, $category, $month, $year);
+    
         try {
+
             $this->executeRequest($sql, $params);
             return true;
         } catch (PDOException $e) {
             return false;
         }
     }
-    
-
+ 
     /**
      * Delete an expense.
      *
